@@ -43,7 +43,7 @@ const Navbar = () => {
           {/* Logo */}
           <Link
             to="/"
-            className="text-secondary font-semibold text-2xl sm:text-3xl uppercase mr-4"
+            className="text-primary font-semibold text-2xl sm:text-3xl uppercase mr-4"
           >
             Tech Vibes
           </Link>
