@@ -1,6 +1,13 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from "react";
-import { FaCaretDown, FaCartShopping, FaUser, FaBars, FaTimes } from "react-icons/fa";
+import {
+  FaCaretDown,
+  FaShoppingCart,
+  FaUser,
+  FaBars,
+  FaTimes,
+} from "react-icons/fa";
+
 import DarkMode from "./DarkMode";
 import { Link } from "react-router-dom";
 import { useCart } from "../../useCart";
@@ -32,15 +39,14 @@ const Navbar = () => {
   return (
     <div className="bg-white dark:bg-gray-900 dark:text-white fixed top-0 w-full z-40">
       <div className="py-4">
-        <div className="container flex justify-between items-center">
+        <div className="container flex justify-between items-center px-4 gap-4">
           {/* Logo */}
           <Link
             to="/"
-            className="text-primary font-semibold text-2xl sm:text-3xl uppercase"
+            className="text-secondary font-semibold text-2xl sm:text-3xl uppercase mr-4"
           >
             Tech Vibes
           </Link>
-
           {/* Navbar Links - Hidden on Mobile */}
           <div className="hidden lg:flex items-center gap-6">
             <Link
@@ -66,11 +72,10 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden text-gray-600 dark:text-white text-2xl"
+            className="lg:hidden text-gray-600 dark:text-white text-2xl ml-auto"
           >
             {isMenuOpen ? <FaTimes /> : <FaBars />}
           </button>
-
           {/* Mobile Menu - Slide in */}
           <div
             className={`fixed top-0 left-0 h-full w-64 bg-white dark:bg-gray-900 shadow-md transform ${
@@ -110,7 +115,7 @@ const Navbar = () => {
 
           {/* Cart */}
           <Link to="/cart" className="relative p-3">
-            <FaCartShopping className="text-xl text-gray-600 dark:text-gray-400" />
+            <FaShoppingCart className="text-xl text-gray-600 dark:text-gray-400" />
             {cart.length > 0 && (
               <span className="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white text-xs flex items-center justify-center rounded-full">
                 {cart.length}
