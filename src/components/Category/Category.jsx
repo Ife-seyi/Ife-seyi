@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Heading from "../../components/Shared/Heading";
-// import Button from "../../components/Shared/Button";
 import { Link } from "react-router-dom";
 import { useCart } from "../../useCart";
 import { ClipLoader } from "react-spinners";
@@ -10,7 +9,7 @@ import { ClipLoader } from "react-spinners";
 const Category = () => {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { addToCart } = useCart(); // Get addToCart function from context
+  const { addToCart } = useCart();
 
   const fetchData = async () => {
     try {
@@ -50,34 +49,37 @@ const Category = () => {
           ) : (
             items.map((item) => (
               <div
-                className="py-10 pl-5 bg-gradient-to-br from-primary to-primary/40 text-white rounded-3xl relative flex items-end mb-10"
+                className="py-10 pl-5 bg-gradient-to-br from-primary to-primary/40 text-white rounded-3xl relative flex items-end mb-10 group"
                 key={item.id}
               >
-                <div>
-                  <div className="group">
-                    <img
-                      src={item.thumbnail}
-                      className="h-[180px] w-[260px] object-contain rounded"
-                      alt={item.title}
-                    />
+                <div className="relative w-full">
+                  <img
+                    src={item.thumbnail}
+                    className="h-[180px] w-[260px] object-contain rounded transition-transform duration-300 group-hover:scale-105"
+                    alt={item.title}
+                  />
 
-                    <div className="group-hover:flex hidden absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 h-full w-full text-center group-hover:backdrop-blur-sm justify-center items-center">
-                      <button
-                        className="bg-white text-primary font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-gray-100 transition-all"
-                        onClick={() => addToCart(item)}
-                      >
-                        Add to Cart
-                      </button>
-                    </div>
+                  {/* Buttons - Visible on hover */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-md bg-black/30 rounded-lg p-4">
+                    <button
+                      className="bg-white text-primary font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-gray-100 transition-all mb-2"
+                      onClick={() => addToCart(item)}
+                    >
+                      Add to Cart
+                    </button>
+                    <Link
+                      to={`/singleProduct/${item.id}`}
+                      className="bg-black text-white px-4 py-2 rounded-lg shadow-md hover:bg-gray-800 transition-all"
+                    >
+                      View Details
+                    </Link>
                   </div>
+                </div>
+
+                {/* Product Title & Price (Always Visible) */}
+                <div className="mt-2">
                   <h2 className="font-bold">{item.title}</h2>
-                  <h2 className="mb-4">${item.price}</h2>
-                  <Link
-                    to={`/singleProduct/${item.id}`}
-                    className="bg-black/70 text-white px-4 py-2 rounded-lg"
-                  >
-                    View Details
-                  </Link>
+                  <h2 className="mb-2">${item.price}</h2>
                 </div>
               </div>
             ))
