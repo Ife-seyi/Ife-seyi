@@ -41,7 +41,7 @@ const Category = () => {
     <div className="mb-10">
       <Heading title="Our Products" subtitle="Explore our products" />
       <div className="container">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {isLoading ? (
             <div className="flex justify-center items-center h-40">
               <ClipLoader color="#3498db" size={50} />
@@ -49,18 +49,19 @@ const Category = () => {
           ) : (
             items.map((item) => (
               <div
-                className="py-10 pl-5 bg-gradient-to-br from-primary to-primary/40 text-white rounded-3xl relative flex items-end mb-10 group"
+                className="relative bg-white shadow-lg rounded-xl overflow-hidden group transition-all duration-300 hover:shadow-2xl"
                 key={item.id}
               >
-                <div className="relative w-full">
+                {/* Image Section */}
+                <div className="relative">
                   <img
                     src={item.thumbnail}
-                    className="h-[180px] w-[260px] object-contain rounded transition-transform duration-300 group-hover:scale-105"
+                    className="h-[220px] w-full object-cover transition-transform duration-300 group-hover:scale-105"
                     alt={item.title}
                   />
 
-                  {/* Buttons - Visible on hover */}
-                  <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-md bg-black/30 rounded-lg p-4">
+                  {/* Hover Overlay for Buttons */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/50 backdrop-blur-md p-4">
                     <button
                       className="bg-white text-primary font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-gray-100 transition-all mb-2"
                       onClick={() => addToCart(item)}
@@ -77,9 +78,9 @@ const Category = () => {
                 </div>
 
                 {/* Product Title & Price (Always Visible) */}
-                <div className="mt-2">
-                  <h2 className="font-bold">{item.title}</h2>
-                  <h2 className="mb-2">${item.price}</h2>
+                <div className="p-4 text-center">
+                  <h2 className="font-bold text-lg text-gray-900 dark:text-white">{item.title}</h2>
+                  <h2 className="text-primary text-lg font-semibold mt-1">${item.price}</h2>
                 </div>
               </div>
             ))
