@@ -1,5 +1,5 @@
-import React from "react";
-import { useState } from "react";
+// eslint-disable-next-line no-unused-vars
+import React, { useState, useEffect } from "react";
 import Hero from "./components/Hero/Hero";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -15,10 +15,11 @@ import About from "./components/About/About";
 import CartPage from "./components/cartPage/CartPage";
 import CheckoutPage from "./components/CheckoutPage/CheckoutPage";
 import Signup from "./Pages/Signup/Signup";
-import Login from "./Pages/Login/Login"; // Import Login Page
+import Login from "./Pages/Login/Login";
+import ScrollToTop from "./ScrollToTop"; // Import ScrollToTop
 
 const App = () => {
-  React.useEffect(() => {
+  useEffect(() => {
     AOS.init({
       duration: 800,
       easing: "ease-in-sine",
@@ -40,11 +41,9 @@ const App = () => {
   };
 
   return (
-    <div
-      className="bg-white dark:bg-gray-900 dark:text-white
-    duration-200 overflow-hidden"
-    >
+    <div className="bg-white dark:bg-gray-900 dark:text-white duration-200 overflow-hidden">
       <BrowserRouter>
+        <ScrollToTop /> {/* ✅ Add ScrollToTop here */}
         <Routes>
           <Route
             path="/"
