@@ -49,7 +49,7 @@ const Category = () => {
           ) : (
             items.map((item) => (
               <div
-                className="relative bg-white shadow-lg rounded-xl overflow-hidden group transition-all duration-300 hover:shadow-2xl"
+                className="relative bg-primary/90 shadow-lg rounded-xl overflow-hidden group transition-all duration-300 hover:shadow-2xl"
                 key={item.id}
               >
                 {/* Image Section */}
