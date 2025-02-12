@@ -16,7 +16,7 @@ import CartPage from "./components/cartPage/CartPage";
 import CheckoutPage from "./components/CheckoutPage/CheckoutPage";
 import Signup from "./Pages/Signup/Signup";
 import Login from "./Pages/Login/Login";
-import ScrollToTop from "./ScrollToTop"; // Import ScrollToTop
+import ScrollToTop from './components/ScrollToTop/ScrollToTop'; // Import ScrollToTop
 
 const App = () => {
   useEffect(() => {
