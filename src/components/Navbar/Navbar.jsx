@@ -37,16 +37,17 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-900 dark:text-white fixed top-0 w-full z-40">
+    <div className="bg-white dark:bg-gray-900 dark:text-white fixed top-0 w-full z-40 shadow-md">
       <div className="py-4">
         <div className="container flex justify-between items-center px-4 gap-4">
           {/* Logo */}
           <Link
             to="/"
-            className="text-primary font-semibold text-2xl sm:text-3xl uppercase mr-4"
+            className="text-primary font-semibold text-2xl sm:text-3xl uppercase"
           >
             Tech Vibes
           </Link>
+
           {/* Navbar Links - Hidden on Mobile */}
           <div className="hidden lg:flex items-center gap-6">
             <Link
@@ -69,26 +70,93 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden text-gray-600 dark:text-white text-2xl ml-auto"
-          >
-            {isMenuOpen ? <FaTimes /> : <FaBars />}
-          </button>
+          {/* Icons Section */}
+          <div className="flex items-center gap-4">
+            {/* Dark Mode Toggle */}
+            <div className="hidden lg:block">
+              <DarkMode />
+            </div>
+
+            {/* Cart */}
+            <Link to="/cart" className="relative p-3">
+              <FaShoppingCart className="text-xl text-gray-600 dark:text-gray-400" />
+              {cart.length > 0 && (
+                <span className="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white text-xs flex items-center justify-center rounded-full">
+                  {cart.length}
+                </span>
+              )}
+            </Link>
+
+            {/* Account Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setIsAccountOpen(!isAccountOpen)}
+                className="flex items-center gap-2 p-3 text-gray-600 dark:text-white"
+              >
+                <FaUser className="text-xl" />
+                <span>{isLoggedIn ? `Hi, ${userName}` : "Account"}</span>
+                <FaCaretDown />
+              </button>
+              {isAccountOpen && (
+                <div className="absolute right-0 w-48 bg-white dark:bg-gray-800 shadow-md rounded-md p-2">
+                  {isLoggedIn ? (
+                    <>
+                      <Link
+                        to="/account"
+                        className="block p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md"
+                      >
+                        My Account
+                      </Link>
+                      <Link
+                        to="/orders"
+                        className="block p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md"
+                      >
+                        Orders
+                      </Link>
+                      <button
+                        onClick={handleLogout}
+                        className="block p-2 w-full text-left hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md"
+                      >
+                        Logout
+                      </button>
+                    </>
+                  ) : (
+                    <Link
+                      to="/login"
+                      className="block p-2 bg-primary text-white text-center rounded-md"
+                    >
+                      Sign In
+                    </Link>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="lg:hidden text-gray-600 dark:text-white text-2xl"
+            >
+              {isMenuOpen ? <FaTimes /> : <FaBars />}
+            </button>
+          </div>
+
           {/* Mobile Menu - Slide in */}
           <div
             className={`fixed top-0 left-0 h-full w-64 bg-white dark:bg-gray-900 shadow-md transform ${
               isMenuOpen ? "translate-x-0" : "-translate-x-full"
-            } transition-transform duration-300 lg:hidden`}
+            } transition-transform duration-300 lg:hidden p-6`}
           >
+            {/* Close Button */}
             <button
               onClick={() => setIsMenuOpen(false)}
               className="absolute top-4 right-4 text-gray-600 dark:text-white text-2xl"
             >
               <FaTimes />
             </button>
-            <div className="flex flex-col items-start p-6 gap-6">
+
+            {/* Mobile Menu Links */}
+            <div className="flex flex-col items-start gap-6 mt-10">
               <Link
                 to="/"
                 className="text-gray-500 hover:text-black dark:hover:text-white"
@@ -111,65 +179,12 @@ const Navbar = () => {
                 About
               </Link>
             </div>
+
+            {/* Mobile Dark Mode Toggle */}
+            <div className="mt-6">
+              <DarkMode />
+            </div>
           </div>
-
-          {/* Cart */}
-          <Link to="/cart" className="relative p-3">
-            <FaShoppingCart className="text-xl text-gray-600 dark:text-gray-400" />
-            {cart.length > 0 && (
-              <span className="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white text-xs flex items-center justify-center rounded-full">
-                {cart.length}
-              </span>
-            )}
-          </Link>
-
-          {/* Account Dropdown */}
-          <div className="relative">
-            <button
-              onClick={() => setIsAccountOpen(!isAccountOpen)}
-              className="flex items-center gap-2 p-3 text-gray-600 dark:text-white"
-            >
-              <FaUser className="text-xl" />
-              <span>{isLoggedIn ? `Hi, ${userName}` : "Account"}</span>
-              <FaCaretDown />
-            </button>
-            {isAccountOpen && (
-              <div className="absolute right-0 w-48 bg-white dark:bg-gray-800 shadow-md rounded-md p-2">
-                {isLoggedIn ? (
-                  <>
-                    <Link
-                      to="/account"
-                      className="block p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md"
-                    >
-                      My Account
-                    </Link>
-                    <Link
-                      to="/orders"
-                      className="block p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md"
-                    >
-                      Orders
-                    </Link>
-                    <button
-                      onClick={handleLogout}
-                      className="block p-2 w-full text-left hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md"
-                    >
-                      Logout
-                    </button>
-                  </>
-                ) : (
-                  <Link
-                    to="/login"
-                    className="block p-2 bg-primary text-white text-center rounded-md"
-                  >
-                    Sign In
-                  </Link>
-                )}
-              </div>
-            )}
-          </div>
-
-          {/* Dark Mode */}
-          <DarkMode />
         </div>
       </div>
     </div>

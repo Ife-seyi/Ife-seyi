@@ -10,13 +10,13 @@ const Signup = () => {
 
   const handleSignup = (e) => {
     e.preventDefault();
-    
+
     // Simulating user signup (Replace with backend logic)
     localStorage.setItem("userName", name);
     localStorage.setItem("userEmail", email);
     localStorage.setItem("userPassword", password);
     localStorage.setItem("isLoggedIn", true);
-    
+
     navigate("/"); // Redirect to homepage after signup
   };
 
@@ -31,7 +31,7 @@ const Signup = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
-            className="w-full p-2 mb-4 border rounded-md"
+            className="w-full p-2 mb-4 border rounded-md text-black/50 dark:text-white/50"
           />
           <input
             type="email"
@@ -39,7 +39,7 @@ const Signup = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full p-2 mb-4 border rounded-md"
+            className="w-full p-2 mb-4 border rounded-md text-black/50 dark:text-white/50"
           />
           <input
             type="password"
@@ -47,7 +47,7 @@ const Signup = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full p-2 mb-4 border rounded-md"
+            className="w-full p-2 mb-4 border rounded-md text-black/50 dark:text-white/50"
           />
           <button
             type="submit"
