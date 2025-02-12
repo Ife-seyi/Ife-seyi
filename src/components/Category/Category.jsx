@@ -80,7 +80,7 @@ const Category = () => {
                 {/* Product Title & Price (Always Visible) */}
                 <div className="p-4 text-center">
                   <h2 className="font-bold text-lg text-gray-900 dark:text-white">{item.title}</h2>
-                  <h2 className="text-primary text-lg font-semibold mt-1">${item.price}</h2>
+                  <h2 className="text-white text-lg font-semibold mt-1">${item.price}</h2>
                 </div>
               </div>
             ))
