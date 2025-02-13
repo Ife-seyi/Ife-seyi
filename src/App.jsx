@@ -16,7 +16,7 @@ import CartPage from "./components/cartPage/CartPage";
 import CheckoutPage from "./components/CheckoutPage/CheckoutPage";
 import Signup from "./Pages/Signup/Signup";
 import Login from "./Pages/Login/Login";
-import ScrollToTop from './components/ScrollToTop/ScrollToTop'; // Import ScrollToTop
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop"; // Import ScrollToTop
 
 const App = () => {
   useEffect(() => {
@@ -30,6 +30,7 @@ const App = () => {
   }, []);
 
   const [show, setShow] = useState(false);
+  const [cart, setCart] = useState([]);
 
   const handleClose = () => {
     setShow(!show);
@@ -48,11 +49,16 @@ const App = () => {
           <Route
             path="/"
             element={
-              <Layout handle={handleClose} loml={show} handle2={handleClose2} />
+              <Layout
+                handle={handleClose}
+                loml={show}
+                handle2={handleClose2}
+                cart={cart}
+              />
             }
           >
             <Route index element={<Hero handleOrderPopup={handleClose} />} />
-            <Route path="/shop" element={<Shop />} />
+            <Route path="/shop" element={<Shop setCart={setCart} />} />
             <Route path="/singleProduct/:id" element={<SingleProduct />} />
             <Route path="/blog" element={<Blogs />} />
             <Route path="/about" element={<About />} />

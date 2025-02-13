@@ -1,5 +1,7 @@
+// eslint-disable-next-line no-unused-vars
 import React from 'react'
 
+// eslint-disable-next-line react/prop-types
 const Heading = ({title,subtitle}) => {
   return (
     <div className='text-center mb-10
