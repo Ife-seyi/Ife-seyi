@@ -87,13 +87,19 @@ const About = () => {
       </section>
 
       {/* Team Section (Optional) */}
+      {/* Team Section */}
       <section className="container mx-auto py-10 px-6 md:px-16">
         <h2 className="text-2xl md:text-3xl font-bold text-center text-primary">
           Meet Our Team
         </h2>
         <div className="grid md:grid-cols-3 gap-8 mt-8">
           <div className="text-center">
-            <img src={vee} alt="Team Member" className="rounded-full mx-auto" />
+            <img
+              src={vee}
+              alt="Team Member"
+              className="rounded-full mx-auto w-20 h-20 md:w-40 md:h-40 object-cover"
+            />{" "}
+            {/* ✅ Responsive image size */}
             <h3 className="text-lg font-semibold mt-4">Victoria Archibong</h3>
             <p className="text-gray-500">Founder & CEO</p>
           </div>
@@ -101,8 +107,9 @@ const About = () => {
             <img
               src={black}
               alt="Team Member"
-              className="rounded-full mx-auto"
-            />
+              className="rounded-full mx-auto w-20 h-20 md:w-40 md:h-40 object-cover"
+            />{" "}
+            {/* ✅ Smaller on mobile */}
             <h3 className="text-lg font-semibold mt-4">John Doe</h3>
             <p className="text-gray-500">Chief Operations Officer</p>
           </div>
@@ -110,8 +117,9 @@ const About = () => {
             <img
               src={woman}
               alt="Team Member"
-              className="rounded-full mx-auto"
-            />
+              className="rounded-full mx-auto w-20 h-20 md:w-40 md:h-40 object-cover"
+            />{" "}
+            {/* ✅ Consistent style */}
             <h3 className="text-lg font-semibold mt-4">Jane Smith</h3>
             <p className="text-gray-500">Head of Marketing</p>
           </div>
