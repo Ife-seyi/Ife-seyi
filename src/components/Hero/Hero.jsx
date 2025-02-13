@@ -130,7 +130,7 @@ const Hero = ({ handleOrderPopup }) => {
                     >
                       <Button
                         className="cursor-pointer"
-                        text="Shop By Category"
+                        text="Shop Now"
                         bgColor="bg-primary"
                         textColor="text-white"
                         handler={handleOrderPopup}

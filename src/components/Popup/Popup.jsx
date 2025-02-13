@@ -1,8 +1,10 @@
+// eslint-disable-next-line no-unused-vars
 import React from 'react'
 import { IoCloseCircleOutline } from 'react-icons/io5'
 import Button from '../Shared/Button';
 
 
+// eslint-disable-next-line react/prop-types
 const Popup = ({handleOrderPopup, show = false }) => {
 
 
