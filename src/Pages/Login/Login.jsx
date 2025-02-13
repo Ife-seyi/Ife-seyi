@@ -37,7 +37,7 @@ const Login = ({ setUser }) => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full p-2 mb-4 border rounded-md text-black/50 dark:text-white/50"
+            className="w-full p-2 mb-4 border rounded-md text-gray-800 dark:text-white bg-white dark:bg-gray-700"
           />
           <input
             type="password"
@@ -45,7 +45,7 @@ const Login = ({ setUser }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full p-2 mb-4 border rounded-md text-black/50 dark:text-white/50"
+            className="w-full p-2 mb-4 border rounded-md text-gray-800 dark:text-white bg-white dark:bg-gray-700"
           />
           <button
             type="submit"
