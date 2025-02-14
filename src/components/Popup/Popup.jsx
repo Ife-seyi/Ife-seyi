@@ -9,6 +9,7 @@ import Button from "../Shared/Button";
 const Popup = ({ handleOrderPopup, show = false, cart }) => {
 
   console.log("Popup show state:", show);
+  console.log(cart);
   const navigate = useNavigate();
 
   if (!show) return null;
