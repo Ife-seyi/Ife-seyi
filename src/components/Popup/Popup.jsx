@@ -7,6 +7,8 @@ import Button from "../Shared/Button";
 
 // eslint-disable-next-line react/prop-types
 const Popup = ({ handleOrderPopup, show = false, cart }) => {
+
+  console.log("Popup show state:", show);
   const navigate = useNavigate();
 
   if (!show) return null;
@@ -49,7 +51,7 @@ const Popup = ({ handleOrderPopup, show = false, cart }) => {
                 text="Order Now"
                 bgColor={"bg-primary"}
                 textColor={"text-white"}
-                onClick={handleOrderNow}
+                handler={handleOrderNow}
               />
             </div>
           </div>
