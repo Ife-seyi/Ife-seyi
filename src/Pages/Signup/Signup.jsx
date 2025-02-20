@@ -1,23 +1,30 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
 
-    // Simulating user signup (Replace with backend logic)
-    localStorage.setItem("userName", name);
-    localStorage.setItem("userEmail", email);
-    localStorage.setItem("userPassword", password);
-    localStorage.setItem("isLoggedIn", true);
+    try {
+      const response = await axios.defaults.baseURL("https://tv-backend-one.vercel.app/", {
+        name,
+        email,
+        password,
+      });
 
-    navigate("/"); // Redirect to homepage after signup
+      setMessage(response.data.message);
+      navigate("/login"); // Redirect after signup
+    } catch (error) {
+      setMessage(error.response?.data?.error || "Signup failed. Try again.");
+    }
   };
 
   return (
@@ -31,7 +38,7 @@ const Signup = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
-            className="w-full p-2 mb-4 border rounded-md text-gray-800 dark:text-white bg-white dark:bg-gray-700"
+            className="w-full p-2 mb-4 border rounded-md"
           />
           <input
             type="email"
@@ -39,7 +46,7 @@ const Signup = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full p-2 mb-4 border rounded-md text-gray-800 dark:text-white bg-white dark:bg-gray-700"
+            className="w-full p-2 mb-4 border rounded-md"
           />
           <input
             type="password"
@@ -47,15 +54,13 @@ const Signup = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full p-2 mb-4 border rounded-md text-gray-800 dark:text-white bg-white dark:bg-gray-700"
+            className="w-full p-2 mb-4 border rounded-md"
           />
-          <button
-            type="submit"
-            className="w-full bg-primary text-white p-2 rounded-md"
-          >
+          <button type="submit" className="w-full bg-primary text-white p-2 rounded-md">
             Sign Up
           </button>
         </form>
+        {message && <p className="mt-4 text-center text-red-500">{message}</p>}
         <p className="text-center mt-4">
           Already have an account?{" "}
           <Link to="/login" className="text-primary">

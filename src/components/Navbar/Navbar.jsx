@@ -9,31 +9,36 @@ import {
 } from "react-icons/fa";
 
 import DarkMode from "./DarkMode";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // ✅ Add useNavigate
 import { useCart } from "../../useCart";
 
 const Navbar = () => {
   const { cart } = useCart();
+  const navigate = useNavigate(); // ✅ Initialize useNavigate
+
   const [isAccountOpen, setIsAccountOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // State for mobile menu
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // Mobile menu state
 
-  // Check if user is logged in
+  // ✅ Check if user is logged in & get username
   useEffect(() => {
+    const storedUser = localStorage.getItem("userName");
     const loggedIn = localStorage.getItem("isLoggedIn") === "true";
+
     setIsLoggedIn(loggedIn);
-    if (loggedIn) {
-      setUserName(localStorage.getItem("userName") || "User");
+    if (loggedIn && storedUser) {
+      setUserName(storedUser);
     }
   }, []);
 
-  // Logout function
+  // ✅ Logout function - Clears data & redirects
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("userName");
     setIsLoggedIn(false);
     setUserName("");
+    navigate("/login"); // Redirect to login page after logout
   };
 
   return (

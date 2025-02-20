@@ -2,27 +2,30 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 // eslint-disable-next-line react/prop-types
 const Login = ({ setUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
-    // Retrieve stored user data
-    const storedEmail = localStorage.getItem("userEmail");
-    const storedPassword = localStorage.getItem("userPassword");
-    const userName = localStorage.getItem("userName");
+    try {
+      const response = await axios.defaults.baseURL("https://tv-backend-one.vercel.app/", {
+        email,
+        password,
+      });
 
-    if (email === storedEmail && password === storedPassword) {
-      localStorage.setItem("isLoggedIn", true);
-      setUser(userName); // Update authentication state with user name
-      navigate("/"); // Redirect to homepage after login
-    } else {
-      alert("Invalid login credentials");
+      // Store token in localStorage
+      localStorage.setItem("token", response.data.token);
+      setUser(response.data.userName); // Update user state
+      navigate("/"); // Redirect to homepage
+    } catch (error) {
+      setMessage(error.response?.data?.error || "Invalid credentials.");
     }
   };
 
@@ -37,7 +40,7 @@ const Login = ({ setUser }) => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full p-2 mb-4 border rounded-md text-gray-800 dark:text-white bg-white dark:bg-gray-700"
+            className="w-full p-2 mb-4 border rounded-md"
           />
           <input
             type="password"
@@ -45,7 +48,7 @@ const Login = ({ setUser }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full p-2 mb-4 border rounded-md text-gray-800 dark:text-white bg-white dark:bg-gray-700"
+            className="w-full p-2 mb-4 border rounded-md"
           />
           <button
             type="submit"
@@ -54,6 +57,7 @@ const Login = ({ setUser }) => {
             Sign In
           </button>
         </form>
+        {message && <p className="mt-4 text-center text-red-500">{message}</p>}
         <p className="text-center mt-4">
           Don't have an account?{" "}
           <Link to="/signup" className="text-primary">

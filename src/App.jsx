@@ -16,7 +16,8 @@ import CartPage from "./components/cartPage/CartPage";
 import CheckoutPage from "./components/CheckoutPage/CheckoutPage";
 import Signup from "./Pages/Signup/Signup";
 import Login from "./Pages/Login/Login";
-import ScrollToTop from "./components/ScrollToTop/ScrollToTop"; // Import ScrollToTop
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop"; 
+import ProtectedRoute from "./components/ProtectedRoute"; // ✅ Import ProtectedRoute
 
 const App = () => {
   useEffect(() => {
@@ -44,7 +45,7 @@ const App = () => {
   return (
     <div className="bg-white dark:bg-gray-900 dark:text-white duration-200 overflow-hidden">
       <BrowserRouter>
-        <ScrollToTop /> {/* ✅ Add ScrollToTop here */}
+        <ScrollToTop /> 
         <Routes>
           <Route
             path="/"
@@ -62,11 +63,27 @@ const App = () => {
             <Route path="/singleProduct/:id" element={<SingleProduct />} />
             <Route path="/blog" element={<Blogs />} />
             <Route path="/about" element={<About />} />
-            <Route path="/cart" element={<CartPage />} />
-            <Route path="/checkout" element={<CheckoutPage />} />
+
+            {/* ✅ Protect Cart and Checkout Routes */}
+            <Route
+              path="/cart"
+              element={
+                <ProtectedRoute>
+                  <CartPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/checkout"
+              element={
+                <ProtectedRoute>
+                  <CheckoutPage />
+                </ProtectedRoute>
+              }
+            />
           </Route>
 
-          {/* New Routes for Authentication */}
+          {/* Authentication Routes */}
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
         </Routes>
